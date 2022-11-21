@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 02:52:50 by jefernan          #+#    #+#             */
-/*   Updated: 2022/11/15 01:27:44 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/11/21 01:25:29 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	eat(t_philo *philo, int *fork_sides)
 {
 	hold_forks(philo, fork_sides);
 	print_status(philo, EAT);
-	write_var(&philo->last_meal, &(philo->mutex_last_meal), current_time());
+	write_var(&philo->last_meal, &(philo->mutex_last_meal),
+		elapsed_time(philo->data->start_time));
 	usleep(philo->data->time_eat * 1000);
 	drop_forks(philo, fork_sides);
 }

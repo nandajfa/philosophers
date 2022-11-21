@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 00:50:52 by jefernan          #+#    #+#             */
-/*   Updated: 2022/11/14 15:10:16 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/11/21 00:43:58 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,6 @@ void	print_status(t_philo *philo, int status)
 			printf("%05li %d is thinking\n", time_now, philo->philo_id);
 	}
 	pthread_mutex_unlock(&(philo->data->write));
-}
-
-long int	current_time(void)
-{
-	struct timeval	tv;
-	long int		time;
-
-	gettimeofday(&tv, NULL);
-	time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
-	return (time);
-}
-
-long int	elapsed_time(long int start_time)
-{
-	return ((current_time() - start_time));
 }
 
 long int	read_var(long int *var, pthread_mutex_t *mutex)

@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 23:25:31 by jefernan          #+#    #+#             */
-/*   Updated: 2022/11/14 16:42:20 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/11/20 23:52:13 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,23 @@ void	*check_philos(void	*arg)
 
 int	verify_death(t_data *data)
 {
-	int	i;
+	int			i;
+	long int	time_now;
 
 	i = 0;
 	if (data->died == 1 || data->finish == 1)
 		return (1);
+	time_now = elapsed_time(data->start_time);
 	while (i < data->nb_philos && data->nb_philos != 1)
 	{
-		if (current_time() - read_var(&(data->philo)[i].last_meal, &(data->philo)[i].mutex_last_meal) > data->time_die)
+		if (time_now - read_var(&(data->philo)[i].last_meal,
+			&(data->philo)[i].mutex_last_meal) > data->time_die)
 		{
 			somebody_died(data, i);
 			return (1);
 		}
 		i++;
-		usleep(10);
+		usleep(200);
 	}
 	if (i >= data->nb_philos)
 		i = 0;

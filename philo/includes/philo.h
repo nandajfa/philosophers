@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 20:53:53 by jefernan          #+#    #+#             */
-/*   Updated: 2022/11/15 01:12:50 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/11/21 00:51:29 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,41 +66,44 @@ struct s_philo
 	t_data			*data;
 };
 
-/*philo*/
+// philo
 int			create_thread(t_data *data, int nb);
 void		*routine(void *arg);
 void		one_philo(t_philo *philo, int *fork_sides);
 void		clear_mutex(t_data *data);
 
-/* check */
+// check 
 int			check_args(int argc, char **argv);
 int			ft_atoi(const char *str);
 int			ft_isdigit(char *str);
 int			ft_isspace(int c);
 
-/* init*/
+// init
 void		init_args(int argc, char **argv, t_data *data);
 void		init_philos(t_data *data, int nb);
 void		set_forks(t_philo *philo, int *fork_sides);
 
-/*simulation*/
+// simulation
 void		eat(t_philo *philo, int *fork_sides);
 void		think(t_philo *philo);
 void		sleeping(t_philo *philo);
 void		hold_forks(t_philo *philo, int *fork_sides);
 void		drop_forks(t_philo *philo, int *fork_sides);
 
-/* verify*/
+// verify
 void		*check_philos(void	*arg);
 int			verify_death(t_data *data);
 int			is_satisfied(t_data *data);
 void		somebody_died(t_data *data, int i);
 
-/*utils*/
+// utils
 void		print_status(t_philo *philo, int status);
-long int	current_time(void);
-long int	elapsed_time(long int start_time);
 long int	read_var(long int *var, pthread_mutex_t *mutex);
 void		write_var(long int *var, pthread_mutex_t *mutex, long int status);
+
+// time
+long int	current_time(void);
+long int	elapsed_time(long int start_time);
+void		time_sleep(int time_ms);
 
 #endif
