@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 02:52:50 by jefernan          #+#    #+#             */
-/*   Updated: 2022/11/21 01:25:29 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/11/21 23:36:43 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ void	drop_forks(t_philo *philo, int *fork_sides)
 
 void	think(t_philo *philo)
 {
-	if (philo->data->finish == 0)
+	if (read_var(&philo->data->finish, &philo->data->mutex_finish) == 0)
 		print_status(philo, THINK);
 }
 
 void	sleeping(t_philo *philo)
 {
-	if (philo->data->finish == 0)
+	if (read_var(&philo->data->finish, &philo->data->mutex_finish) == 0)
 	{
 		print_status(philo, SLEEP);
 		usleep(philo->data->time_sleep * 1000);

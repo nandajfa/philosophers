@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 03:33:09 by jefernan          #+#    #+#             */
-/*   Updated: 2022/11/15 01:43:54 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/11/21 22:10:24 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,13 @@ void	*routine(void *arg)
 		one_philo(philo, fork_sides);
 	if (philo->philo_id % 2 == 0)
 		usleep(60 * 1000);
-	while (philo->data->died == 0)
+	while (read_var(&philo->data->died,
+				&philo->data->mutex_died) == 0)
 	{
 		eat(philo, fork_sides);
-		if (philo->data->finish == 1 || is_satisfied(philo->data))
+		if (read_var(&philo->data->finish,
+			&philo->data->mutex_finish) == 1 ||
+			is_satisfied(philo->data))
 			break ;
 		sleeping(philo);
 		think(philo);
@@ -84,7 +87,7 @@ void	one_philo(t_philo *philo, int *fork_sides)
 	printf("%05li %d died\n", elapsed_time(philo->data->start_time),
 		philo->philo_id);
 	pthread_mutex_unlock(&(philo->data->write));
-	write_var(&philo->data->died, &(philo->data->mutex_died), 1);
+	write_var(&philo->data->died, &philo->data->mutex_died, 1);
 }
 
 void	clear_mutex(t_data *data)
