@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 00:43:36 by jefernan          #+#    #+#             */
-/*   Updated: 2022/11/21 01:06:05 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/11/22 15:45:51 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,3 +26,4 @@ long int	elapsed_time(long int start_time)
 {
 	return ((current_time() - start_time));
 }
+
