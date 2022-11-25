@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:28:08 by jefernan          #+#    #+#             */
-/*   Updated: 2022/11/22 16:05:25 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/11/26 00:10:49 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,6 @@ void	init_philos(t_data *data, int nb)
 
 void	set_forks(t_philo *philo, int *fork_sides)
 {
-//	if (philo->data->nb_philos == 2)
-//	{
-//		fork_sides[LEFT_PHILO] = 0;
-//		fork_sides[RIGHT_PHILO] = 1;
-//		return ;
-//	}
 	fork_sides[LEFT_PHILO] = philo->ph_index;
 	if (philo->ph_index == 0)
 		fork_sides[RIGHT_PHILO] = philo->data->nb_philos - 1;

@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 03:33:09 by jefernan          #+#    #+#             */
-/*   Updated: 2022/11/22 15:38:01 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/11/25 23:17:52 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,12 @@ void	*routine(void *arg)
 	if (philo->data->nb_philos == 1)
 		one_philo(philo, fork_sides);
 	if (philo->philo_id % 2 == 0)
-		usleep(60 * 1000);
-	while (read_var(&philo->data->died,
-				&philo->data->mutex_died) == 0)
+		usleep(50);
+	while (read_var(&philo->data->died, &philo->data->mutex_died) == 0)
 	{
 		eat(philo, fork_sides);
-		if (read_var(&philo->data->finish,
-			&philo->data->mutex_finish) == 1 ||
-			is_satisfied(philo->data))
+		if (read_var(&philo->data->finish, &philo->data->mutex_finish) == 1 
+			|| is_satisfied(philo->data))
 			break ;
 		sleeping(philo);
 		think(philo);

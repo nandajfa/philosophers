@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 23:25:31 by jefernan          #+#    #+#             */
-/*   Updated: 2022/11/22 16:08:50 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/11/26 00:10:46 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ int	verify_death(t_data *data)
 			return (1);
 		}
 		i++;
-		usleep(250);
+		usleep(100);
 	}
-	if (i >= data->nb_philos)
-		i = 0;
 	return (0);
 }
 

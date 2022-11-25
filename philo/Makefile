@@ -6,14 +6,14 @@
 #    By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 22:45:52 by jefernan          #+#    #+#              #
-#    Updated: 2022/11/22 00:33:26 by jefernan         ###   ########.fr        #
+#    Updated: 2022/11/25 23:45:08 by jefernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror 
 PTHREAD = -pthread
 INCLUDES = -I./includes
 RM = rm -rf

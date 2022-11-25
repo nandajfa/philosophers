@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 20:53:53 by jefernan          #+#    #+#             */
-/*   Updated: 2022/11/22 23:49:34 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/11/25 23:00:23 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ void		write_var(long int *var, pthread_mutex_t *mutex, long int status);
 // time
 long int	current_time(void);
 long int	elapsed_time(long int start_time);
+void		time_sleep(long int waiting, long int time);
 
 #endif

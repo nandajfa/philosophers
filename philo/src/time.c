@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 00:43:36 by jefernan          #+#    #+#             */
-/*   Updated: 2022/11/22 15:45:51 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/11/26 00:06:26 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,3 +27,8 @@ long int	elapsed_time(long int start_time)
 	return ((current_time() - start_time));
 }
 
+void	time_sleep(long int waiting, long int time)
+{	
+	while ((current_time() - time) < waiting)
+		usleep (20);
+}
