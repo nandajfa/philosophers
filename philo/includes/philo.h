@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 20:53:53 by jefernan          #+#    #+#             */
-/*   Updated: 2022/11/25 23:00:23 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/11/28 02:07:23 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ struct s_philo
 	int				ph_index;
 	long int		nb_ate_meals;
 	long int		last_meal;
-	pthread_mutex_t mutex_last_meal;
+	pthread_mutex_t	mutex_last_meal;
 	pthread_mutex_t	mutex_ate_meals;
 	pthread_t		thread;
 	t_data			*data;
@@ -69,7 +69,7 @@ struct s_philo
 // philo
 int			create_thread(t_data *data, int nb);
 void		*routine(void *arg);
-void		one_philo(t_philo *philo, int *fork_sides);
+void		one_philo(t_data *data);
 void		clear_mutex(t_data *data);
 
 // check 
@@ -93,7 +93,7 @@ void		drop_forks(t_philo *philo, int *fork_sides);
 // verify
 void		*check_philos(void	*arg);
 int			verify_death(t_data *data);
-int			is_satisfied(t_data *data);
+int			is_satisfied(t_data *data, int i);
 void		somebody_died(t_data *data, int i);
 
 // utils

@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 02:52:50 by jefernan          #+#    #+#             */
-/*   Updated: 2022/11/25 23:29:00 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/11/28 02:03:04 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	hold_forks(t_philo *philo, int *fork_sides)
 		pthread_mutex_lock(&philo->data->forks[fork_sides[RIGHT_PHILO]]);
 		pthread_mutex_lock(&philo->data->forks[fork_sides[LEFT_PHILO]]);
 	}
-	else 
+	else
 	{
 		pthread_mutex_lock(&philo->data->forks[fork_sides[LEFT_PHILO]]);
 		pthread_mutex_lock(&philo->data->forks[fork_sides[RIGHT_PHILO]]);
@@ -47,7 +47,7 @@ void	drop_forks(t_philo *philo, int *fork_sides)
 		pthread_mutex_unlock(&philo->data->forks[fork_sides[RIGHT_PHILO]]);
 		pthread_mutex_unlock(&philo->data->forks[fork_sides[LEFT_PHILO]]);
 	}
-	else 
+	else
 	{
 		pthread_mutex_unlock(&philo->data->forks[fork_sides[LEFT_PHILO]]);
 		pthread_mutex_unlock(&philo->data->forks[fork_sides[RIGHT_PHILO]]);

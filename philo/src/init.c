@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:28:08 by jefernan          #+#    #+#             */
-/*   Updated: 2022/11/26 00:10:49 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/11/28 02:19:12 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	init_philos(t_data *data, int nb)
 	pthread_mutex_init(&data->write, NULL);
 	pthread_mutex_init(&data->mutex_died, NULL);
 	pthread_mutex_init(&data->mutex_finish, NULL);
-	philo = malloc((data->nb_philos + 1) * sizeof(t_philo));
-	data->forks = malloc((nb + 1) * sizeof(pthread_mutex_t));
-	while (i <= nb)
+	philo = malloc((data->nb_philos ) * sizeof(t_philo));
+	data->forks = malloc((nb ) * sizeof(pthread_mutex_t));
+	while (i < nb)
 	{
 		philo[i].philo_id = i + 1;
 		philo[i].ph_index = i;
@@ -64,4 +64,3 @@ void	set_forks(t_philo *philo, int *fork_sides)
 	else
 		fork_sides[RIGHT_PHILO] = philo->ph_index - 1;
 }
-
