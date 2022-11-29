@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 20:53:53 by jefernan          #+#    #+#             */
-/*   Updated: 2022/11/28 02:07:23 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/11/29 22:51:21 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void		drop_forks(t_philo *philo, int *fork_sides);
 // verify
 void		*check_philos(void	*arg);
 int			verify_death(t_data *data);
-int			is_satisfied(t_data *data, int i);
+int			is_satisfied(t_data *data);
 void		somebody_died(t_data *data, int i);
 
 // utils

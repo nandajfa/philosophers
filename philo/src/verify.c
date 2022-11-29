@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 23:25:31 by jefernan          #+#    #+#             */
-/*   Updated: 2022/11/28 02:16:00 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/11/29 23:10:47 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*check_philos(void	*arg)
 	t_data	*data;
 
 	data = arg;
-	while (!verify_death(data))
+	while (!verify_death(data) && !is_satisfied(data))
 		continue ;
 	return (NULL);
 }
@@ -40,30 +40,33 @@ int	verify_death(t_data *data)
 			somebody_died(data, i);
 			return (1);
 		}
-		if (data->nb_times_must_eat > 0 )
-		{
-			if (is_satisfied(data, i))
-			{
-				write_var(&data->finish, &data->mutex_finish, 1);
-				return (1);
-			}	
-		}
 		i++;
-		usleep(100);
+		usleep(150);
 	}
 	return (0);
 }
 
-int	is_satisfied(t_data *data, int i)
-{;
+int	is_satisfied(t_data *data)
+{
+	int	i;
 	int	philo_ate;
 
+	i = 0;
 	philo_ate = 0;
-	if (read_var(&(data->philo)[i].nb_ate_meals,
-		&(data->philo)[i].mutex_ate_meals) >= data->nb_times_must_eat)
-		philo_ate++;
-	if (philo_ate == data->nb_philos)
-		return (1);
+	if (data->nb_times_must_eat > 0)
+	{
+		while (i < data->nb_philos)
+		{
+			if (read_var(&(data->philo)[i].nb_ate_meals,
+				&(data->philo)[i].mutex_ate_meals) >= data->nb_times_must_eat)
+				philo_ate++;
+			i++;
+		}
+		if (philo_ate == data->nb_philos)
+			return (1);
+		else
+			return (0);
+	}
 	return (0);
 }
 
