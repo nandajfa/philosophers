@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 20:53:53 by jefernan          #+#    #+#             */
-/*   Updated: 2022/11/29 22:51:21 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/12/01 00:47:17 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@
 # define EAT 1
 # define THINK 2
 # define SLEEP 3
-# define DIE 4
-# define FORK 5
-# define LEFT_PHILO 0
-# define RIGHT_PHILO 1
+# define FORK 4
 
 /*Errors message*/
 # define ERROR "Error: Wrong number of arguments.\n"
@@ -44,6 +41,7 @@ typedef struct s_data
 	int				time_eat;
 	int				time_sleep;
 	int				nb_times_must_eat;
+	int				available;
 	long int		start_time;
 	long int		finish;
 	long int		died;
@@ -57,9 +55,10 @@ typedef struct s_data
 struct s_philo
 {
 	int				philo_id;
-	int				ph_index;
 	long int		nb_ate_meals;
 	long int		last_meal;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	mutex_last_meal;
 	pthread_mutex_t	mutex_ate_meals;
 	pthread_t		thread;
@@ -81,14 +80,14 @@ int			ft_isspace(int c);
 // init
 void		init_args(int argc, char **argv, t_data *data);
 void		init_philos(t_data *data, int nb);
-void		set_forks(t_philo *philo, int *fork_sides);
+void		init_mutex(t_data *data);
 
 // simulation
-void		eat(t_philo *philo, int *fork_sides);
+void		eat(t_philo *philo);
 void		think(t_philo *philo);
 void		sleeping(t_philo *philo);
-void		hold_forks(t_philo *philo, int *fork_sides);
-void		drop_forks(t_philo *philo, int *fork_sides);
+void		hold_forks(t_philo *philo);
+void		drop_forks(t_philo *philo);
 
 // verify
 void		*check_philos(void	*arg);

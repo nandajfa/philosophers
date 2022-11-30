@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 23:25:31 by jefernan          #+#    #+#             */
-/*   Updated: 2022/11/29 23:10:47 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/12/01 00:50:00 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	verify_death(t_data *data)
 	if (read_var(&data->died, &data->mutex_died) == 1
 		|| read_var(&data->finish, &data->mutex_finish) == 1)
 		return (1);
-	time_now = elapsed_time(data->start_time);
 	while (i < data->nb_philos && data->nb_philos != 1)
 	{
+		time_now = elapsed_time(data->start_time);
 		if (time_now - read_var(&(data->philo)[i].last_meal,
 			&(data->philo)[i].mutex_last_meal) > data->time_die)
 		{
@@ -41,7 +41,7 @@ int	verify_death(t_data *data)
 			return (1);
 		}
 		i++;
-		usleep(150);
+		usleep(200);
 	}
 	return (0);
 }
@@ -77,7 +77,7 @@ void	somebody_died(t_data *data, int i)
 	pthread_mutex_lock(&(data->mutex_died));
 	time = elapsed_time(data->start_time);
 	pthread_mutex_lock(&(data->write));
-	printf("%05ld %d died\n", time, data->philo[i].philo_id);
+	printf("%ld %d died\n", time, data->philo[i].philo_id);
 	pthread_mutex_unlock(&(data->write));
 	write_var(&data->finish, &data->mutex_finish, 1);
 	data->died = 1;

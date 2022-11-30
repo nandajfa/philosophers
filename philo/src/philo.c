@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 03:33:09 by jefernan          #+#    #+#             */
-/*   Updated: 2022/11/29 23:04:45 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/12/01 00:33:15 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int argc, char **argv)
 	if (check_args(argc, argv))
 		return (1);
 	init_args(argc, argv, &data);
+	init_mutex(&data);
 	init_philos(&data, data.nb_philos);
 	create_thread(&data, data.nb_philos);
 	clear_mutex(&data);
@@ -53,19 +54,19 @@ int	create_thread(t_data *data, int nb)
 
 void	*routine(void *arg)
 {
-	t_philo	*philo;
-	int		fork_sides[2];		
+	t_philo	*philo;	
 
 	philo = arg;
-	set_forks(philo, fork_sides);
 	if (philo->data->nb_philos == 1)
 		one_philo(philo->data);
+	write_var(&philo->last_meal, &(philo->mutex_last_meal),
+		philo->data->start_time);
 	if (philo->philo_id % 2 == 0)
 		usleep(50);
 	while (read_var(&philo->data->died, &philo->data->mutex_died) == 0)
 	{
-		eat(philo, fork_sides);
-		if (philo->data->finish == 1 || is_satisfied(philo->data))
+		eat(philo);
+		if (read_var(&philo->data->finish, &philo->data->mutex_finish) == 1 || is_satisfied(philo->data))
 			break ;
 		sleeping(philo);
 		think(philo);

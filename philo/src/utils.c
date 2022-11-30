@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 00:50:52 by jefernan          #+#    #+#             */
-/*   Updated: 2022/11/21 22:08:27 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/12/01 00:46:02 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void	print_status(t_philo *philo, int status)
 	if (read_var(&philo->data->finish, &philo->data->mutex_finish) == 0)
 	{
 		if (status == FORK)
-			printf("%05li %d has taken a fork\n", time_now, philo->philo_id);
+			printf("%ld %d has taken a fork\n", time_now, philo->philo_id);
 		else if (status == EAT)
-			printf ("%05li %d is eating\n", time_now, philo->philo_id);
+			printf ("%ld %d is eating\n", time_now, philo->philo_id);
 		else if (status == SLEEP)
-			printf("%05li %d is sleeping\n", time_now, philo->philo_id);
+			printf("%ld %d is sleeping\n", time_now, philo->philo_id);
 		else if (status == THINK)
-			printf("%05li %d is thinking\n", time_now, philo->philo_id);
+			printf("%ld %d is thinking\n", time_now, philo->philo_id);
 	}
 	pthread_mutex_unlock(&(philo->data->write));
 }

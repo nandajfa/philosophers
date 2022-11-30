@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:28:08 by jefernan          #+#    #+#             */
-/*   Updated: 2022/11/28 02:19:12 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/12/01 00:24:47 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,37 +30,41 @@ void	init_args(int argc, char **argv, t_data *data)
 	}
 }
 
+void	init_mutex(t_data *data)
+{
+	int i;
+	
+	pthread_mutex_init(&data->write, NULL);
+	pthread_mutex_init(&data->mutex_died, NULL);
+	pthread_mutex_init(&data->mutex_finish, NULL);
+	data->forks = malloc(data->nb_philos * sizeof(pthread_mutex_t));
+	i = 0;
+	while (i < data->nb_philos)
+	{
+		pthread_mutex_init(&data->forks[i], NULL);
+		i++;
+	}
+}
+
 void	init_philos(t_data *data, int nb)
 {
 	int		i;
 	t_philo	*philo;
 
 	i = 0;
-	pthread_mutex_init(&data->write, NULL);
-	pthread_mutex_init(&data->mutex_died, NULL);
-	pthread_mutex_init(&data->mutex_finish, NULL);
-	philo = malloc((data->nb_philos ) * sizeof(t_philo));
-	data->forks = malloc((nb ) * sizeof(pthread_mutex_t));
+	philo = malloc(nb * sizeof(t_philo));
 	while (i < nb)
 	{
+		pthread_mutex_init(&philo[i].mutex_last_meal, NULL);
+		pthread_mutex_init(&philo[i].mutex_ate_meals, NULL);
 		philo[i].philo_id = i + 1;
-		philo[i].ph_index = i;
+		philo[i].right_fork = &data->forks[i];
+		philo[i].left_fork = &data->forks[i + 1];
 		philo[i].data = data;
 		philo[i].nb_ate_meals = 0;
 		philo[i].last_meal = 0;
-		pthread_mutex_init(&philo[i].mutex_last_meal, NULL);
-		pthread_mutex_init(&philo[i].mutex_ate_meals, NULL);
-		pthread_mutex_init(&data->forks[i], NULL);
 		i++;
 	}
+	philo[i - 1].left_fork = &data->forks[0];
 	data->philo = philo;
-}
-
-void	set_forks(t_philo *philo, int *fork_sides)
-{
-	fork_sides[LEFT_PHILO] = philo->ph_index;
-	if (philo->ph_index == 0)
-		fork_sides[RIGHT_PHILO] = philo->data->nb_philos - 1;
-	else
-		fork_sides[RIGHT_PHILO] = philo->ph_index - 1;
 }
