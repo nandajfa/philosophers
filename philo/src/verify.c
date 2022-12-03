@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 23:25:31 by jefernan          #+#    #+#             */
-/*   Updated: 2022/12/01 00:50:00 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/12/03 23:56:02 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ int	verify_death(t_data *data)
 	{
 		time_now = elapsed_time(data->start_time);
 		if (time_now - read_var(&(data->philo)[i].last_meal,
-			&(data->philo)[i].mutex_last_meal) > data->time_die)
+			&(data->philo)[i].mutex_last_meal) >= data->time_die)
 		{
 			somebody_died(data, i);
 			return (1);
 		}
 		i++;
-		usleep(200);
+		usleep(550);
 	}
 	return (0);
 }
@@ -53,7 +53,7 @@ int	is_satisfied(t_data *data)
 
 	i = 0;
 	philo_ate = 0;
-	if (data->nb_times_must_eat > 0)
+	if (data->nb_times_must_eat > 0 && read_var(&data->died, &data->mutex_died) != 1)
 	{
 		while (i < data->nb_philos)
 		{
@@ -63,7 +63,10 @@ int	is_satisfied(t_data *data)
 			i++;
 		}
 		if (philo_ate == data->nb_philos)
+		{
+			write_var(&data->finish, &data->mutex_finish, 1);
 			return (1);
+		}	
 		else
 			return (0);
 	}

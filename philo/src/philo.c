@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 03:33:09 by jefernan          #+#    #+#             */
-/*   Updated: 2022/12/01 00:33:15 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/12/04 00:04:41 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	*routine(void *arg)
 	while (read_var(&philo->data->died, &philo->data->mutex_died) == 0)
 	{
 		eat(philo);
-		if (read_var(&philo->data->finish, &philo->data->mutex_finish) == 1 || is_satisfied(philo->data))
+		if (read_var(&philo->data->finish, &philo->data->mutex_finish) == 1)
 			break ;
 		sleeping(philo);
 		think(philo);
