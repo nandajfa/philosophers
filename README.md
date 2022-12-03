@@ -2,7 +2,7 @@
 	42cursus' Philosophers
  </h1>
  
-  [![NPM](https://img.shields.io/npm/l/react)](https://github.com/nandajfa/philosophers/blob/main/LICENSE)
+  [![NPM](https://img.shields.io/npm/l/react)](https://github.com/nandajfa/philo/blob/main/LICENSE)
  
  
  ### 🗣️ About
