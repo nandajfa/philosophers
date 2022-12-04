@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:28:08 by jefernan          #+#    #+#             */
-/*   Updated: 2022/12/01 00:24:47 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/12/04 23:19:00 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	init_args(int argc, char **argv, t_data *data)
 
 void	init_mutex(t_data *data)
 {
-	int i;
-	
+	int	i;
+
 	pthread_mutex_init(&data->write, NULL);
 	pthread_mutex_init(&data->mutex_died, NULL);
 	pthread_mutex_init(&data->mutex_finish, NULL);

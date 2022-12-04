@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 03:33:09 by jefernan          #+#    #+#             */
-/*   Updated: 2022/12/04 00:04:41 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/12/04 22:34:56 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ void	*routine(void *arg)
 {
 	t_philo	*philo;	
 
-	philo = arg;
+	philo = (t_philo *)arg;
 	if (philo->data->nb_philos == 1)
 		one_philo(philo->data);
 	write_var(&philo->last_meal, &(philo->mutex_last_meal),
 		philo->data->start_time);
-	if (philo->philo_id % 2 == 0)
+	if (philo->philo_id % 2)
 		usleep(50);
 	while (read_var(&philo->data->died, &philo->data->mutex_died) == 0)
 	{

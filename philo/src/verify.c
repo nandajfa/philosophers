@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 23:25:31 by jefernan          #+#    #+#             */
-/*   Updated: 2022/12/03 23:56:02 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/12/04 23:19:24 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int	is_satisfied(t_data *data)
 
 	i = 0;
 	philo_ate = 0;
-	if (data->nb_times_must_eat > 0 && read_var(&data->died, &data->mutex_died) != 1)
+	if (data->nb_times_must_eat > 0 && read_var(&data->died,
+			&data->mutex_died) != 1)
 	{
 		while (i < data->nb_philos)
 		{
@@ -66,9 +67,7 @@ int	is_satisfied(t_data *data)
 		{
 			write_var(&data->finish, &data->mutex_finish, 1);
 			return (1);
-		}	
-		else
-			return (0);
+		}
 	}
 	return (0);
 }

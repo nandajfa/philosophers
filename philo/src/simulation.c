@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 02:52:50 by jefernan          #+#    #+#             */
-/*   Updated: 2022/12/01 00:28:57 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/12/04 23:17:16 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,39 +19,23 @@ void	eat(t_philo *philo)
 	write_var(&philo->last_meal, &(philo->mutex_last_meal),
 		elapsed_time(philo->data->start_time));
 	time_sleep(philo->data->time_eat, current_time());
-	write_var(&philo->nb_ate_meals, &(philo->mutex_ate_meals),
-		read_var(&philo->nb_ate_meals, &(philo->mutex_ate_meals)) + 1);
 	drop_forks(philo);
 }
 
 void	hold_forks(t_philo *philo)
 {
-	if (philo->philo_id % 2 == 0)
-	{
-		pthread_mutex_lock(philo->right_fork);
-		pthread_mutex_lock(philo->left_fork);
-	}
-	else
-	{
-		pthread_mutex_lock(philo->left_fork);
-		pthread_mutex_lock(philo->right_fork);
-	}
+	pthread_mutex_lock(philo->right_fork);
 	print_status(philo, FORK);
+	pthread_mutex_lock(philo->left_fork);
 	print_status(philo, FORK);
 }
 
 void	drop_forks(t_philo *philo)
 {
-	if (philo->philo_id % 2 == 0)
-	{
-		pthread_mutex_unlock(philo->right_fork);
-		pthread_mutex_unlock(philo->left_fork);
-	}
-	else
-	{
-		pthread_mutex_unlock(philo->left_fork);
-		pthread_mutex_unlock(philo->right_fork);
-	}
+	pthread_mutex_unlock(philo->right_fork);
+	pthread_mutex_unlock(philo->left_fork);
+	write_var(&philo->nb_ate_meals, &(philo->mutex_ate_meals),
+		read_var(&philo->nb_ate_meals, &(philo->mutex_ate_meals)) + 1);
 }
 
 void	think(t_philo *philo)
