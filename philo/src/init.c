@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:28:08 by jefernan          #+#    #+#             */
-/*   Updated: 2022/12/04 23:19:00 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/12/06 23:24:19 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,12 @@ void	init_args(int argc, char **argv, t_data *data)
 		data->time_die = ft_atoi(argv[2]);
 		data->time_eat = ft_atoi(argv[3]);
 		data->time_sleep = ft_atoi(argv[4]);
-		data->start_time = 0;
 		data->finish = 0;
 		data->died = 0;
 		if (argc == 6)
 			data->nb_times_must_eat = ft_atoi(argv[5]);
 		else
-			data->nb_times_must_eat = -1;
+			data->nb_times_must_eat = INT_MAX;
 	}
 }
 
@@ -62,7 +61,6 @@ void	init_philos(t_data *data, int nb)
 		philo[i].left_fork = &data->forks[i + 1];
 		philo[i].data = data;
 		philo[i].nb_ate_meals = 0;
-		philo[i].last_meal = 0;
 		i++;
 	}
 	philo[i - 1].left_fork = &data->forks[0];

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 23:25:31 by jefernan          #+#    #+#             */
-/*   Updated: 2022/12/04 23:19:24 by jefernan         ###   ########.fr       */
+/*   Created: 2022/12/06 23:06:03 by jefernan          #+#    #+#             */
+/*   Updated: 2022/12/06 23:18:32 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	*check_philos(void	*arg)
 int	verify_death(t_data *data)
 {
 	int			i;
-	long int	time_now;
 
 	i = 0;
 	if (read_var(&data->died, &data->mutex_died) == 1
@@ -33,9 +32,8 @@ int	verify_death(t_data *data)
 		return (1);
 	while (i < data->nb_philos && data->nb_philos != 1)
 	{
-		time_now = elapsed_time(data->start_time);
-		if (time_now - read_var(&(data->philo)[i].last_meal,
-			&(data->philo)[i].mutex_last_meal) >= data->time_die)
+		if (current_time(read_var(&(data->philo)[i].last_meal,
+			&(data->philo)[i].mutex_last_meal)) >= data->time_die)
 		{
 			somebody_died(data, i);
 			return (1);
@@ -53,7 +51,7 @@ int	is_satisfied(t_data *data)
 
 	i = 0;
 	philo_ate = 0;
-	if (data->nb_times_must_eat > 0 && read_var(&data->died,
+	if (data->nb_times_must_eat != INT_MAX && read_var(&data->died,
 			&data->mutex_died) != 1)
 	{
 		while (i < data->nb_philos)
@@ -77,7 +75,7 @@ void	somebody_died(t_data *data, int i)
 	long int	time;
 
 	pthread_mutex_lock(&(data->mutex_died));
-	time = elapsed_time(data->start_time);
+	time = current_time(data->start_time);
 	pthread_mutex_lock(&(data->write));
 	printf("%ld %d died\n", time, data->philo[i].philo_id);
 	pthread_mutex_unlock(&(data->write));

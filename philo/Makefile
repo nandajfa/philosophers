@@ -6,14 +6,14 @@
 #    By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 22:45:52 by jefernan          #+#    #+#              #
-#    Updated: 2022/12/04 22:50:18 by jefernan         ###   ########.fr        #
+#    Updated: 2022/12/06 23:08:28 by jefernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror
 PTHREAD = -pthread
 INCLUDES = -I./includes
 RM = rm -rf
@@ -25,7 +25,7 @@ EOC			:=	\033[1;0m
 
 vpath %.c src
 
-SRCS =	philo.c check.c utils.c simulation.c verify.c init.c time.c
+SRCS =	philo.c check.c utils.c simulation.c init.c time.c threads.c verify.c
 
 OBJ_DIR = ./objs
 OBJECTS = $(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))

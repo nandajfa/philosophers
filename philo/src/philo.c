@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 03:33:09 by jefernan          #+#    #+#             */
-/*   Updated: 2022/12/04 22:34:56 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/12/06 23:15:00 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,67 +22,11 @@ int	main(int argc, char **argv)
 	init_mutex(&data);
 	init_philos(&data, data.nb_philos);
 	create_thread(&data, data.nb_philos);
-	clear_mutex(&data);
-	free(data.philo);
-	free(data.forks);
+	clear_all(&data);
 	return (0);
 }
 
-int	create_thread(t_data *data, int nb)
-{
-	int			i;
-	pthread_t	verify;
-
-	i = 0;
-	data->start_time = current_time();
-	while (i < nb)
-	{
-		pthread_create(&data->philo[i].thread, NULL, &routine,
-			&data->philo[i]);
-		i++;
-	}
-	pthread_create(&verify, NULL, &check_philos, data);
-	i = 0;
-	while (i < nb)
-	{
-		pthread_join(data->philo[i].thread, NULL);
-		i++;
-	}
-	pthread_join(verify, NULL);
-	return (0);
-}
-
-void	*routine(void *arg)
-{
-	t_philo	*philo;	
-
-	philo = (t_philo *)arg;
-	if (philo->data->nb_philos == 1)
-		one_philo(philo->data);
-	write_var(&philo->last_meal, &(philo->mutex_last_meal),
-		philo->data->start_time);
-	if (philo->philo_id % 2)
-		usleep(50);
-	while (read_var(&philo->data->died, &philo->data->mutex_died) == 0)
-	{
-		eat(philo);
-		if (read_var(&philo->data->finish, &philo->data->mutex_finish) == 1)
-			break ;
-		sleeping(philo);
-		think(philo);
-	}
-	return (NULL);
-}
-
-void	one_philo(t_data *data)
-{
-	printf("0 1 has taken a fork\n");
-	usleep(data->time_die * 1000);
-	printf("%li 1 died\n", elapsed_time(data->start_time));
-	write_var(&data->died, &data->mutex_died, 1);
-}
-
-void	clear_mutex(t_data *data)
+void	clear_all(t_data *data)
 {
 	int	i;
 
@@ -97,4 +41,6 @@ void	clear_mutex(t_data *data)
 	pthread_mutex_destroy(&data->write);
 	pthread_mutex_destroy(&data->mutex_died);
 	pthread_mutex_destroy(&data->mutex_finish);
+	free(data->philo);
+	free(data->forks);
 }

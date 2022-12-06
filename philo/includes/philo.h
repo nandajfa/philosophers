@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 20:53:53 by jefernan          #+#    #+#             */
-/*   Updated: 2022/12/04 22:33:23 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/12/06 23:13:03 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,11 @@ struct s_philo
 };
 
 // philo
-int			create_thread(t_data *data, int nb);
+void	create_thread(t_data *data, int nb);
 void		*routine(void *arg);
-void		one_philo(t_data *data);
-void		clear_mutex(t_data *data);
+void		*one_philo(t_data *data);
+void		clear_all(t_data *data);
+
 
 // check 
 int			check_args(int argc, char **argv);
@@ -90,8 +91,8 @@ void		hold_forks(t_philo *philo);
 void		drop_forks(t_philo *philo);
 
 // verify
-void		*check_philos(void	*arg);
-int			verify_death(t_data *data);
+void	*check_philos(void	*arg);
+int	verify_death(t_data *data);
 int			is_satisfied(t_data *data);
 void		somebody_died(t_data *data, int i);
 
@@ -101,8 +102,8 @@ long int	read_var(long int *var, pthread_mutex_t *mutex);
 void		write_var(long int *var, pthread_mutex_t *mutex, long int status);
 
 // time
-long int	current_time(void);
-long int	elapsed_time(long int start_time);
+long int	get_time_ms(void);
+long int	current_time(long int start_time);
 void		time_sleep(long int waiting, long int time);
 
 #endif

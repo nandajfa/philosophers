@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 00:50:52 by jefernan          #+#    #+#             */
-/*   Updated: 2022/12/01 00:46:02 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/12/06 22:21:37 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_status(t_philo *philo, int status)
 	long int	time_now;
 
 	pthread_mutex_lock(&(philo->data->write));
-	time_now = elapsed_time(philo->data->start_time);
+	time_now = current_time(philo->data->start_time);
 	if (read_var(&philo->data->finish, &philo->data->mutex_finish) == 0)
 	{
 		if (status == FORK)
