@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 23:06:03 by jefernan          #+#    #+#             */
-/*   Updated: 2022/12/06 23:18:32 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/12/07 14:26:45 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	verify_death(t_data *data)
 	while (i < data->nb_philos && data->nb_philos != 1)
 	{
 		if (current_time(read_var(&(data->philo)[i].last_meal,
-			&(data->philo)[i].mutex_last_meal)) >= data->time_die)
+				&(data->philo)[i].mutex_last_meal)) >= data->time_die)
 		{
 			somebody_died(data, i);
 			return (1);

@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 20:53:53 by jefernan          #+#    #+#             */
-/*   Updated: 2022/12/06 23:13:03 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/12/07 14:38:35 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ typedef struct s_data
 	int				time_eat;
 	int				time_sleep;
 	int				nb_times_must_eat;
-	int				available;
 	long int		start_time;
 	long int		finish;
 	long int		died;
@@ -66,11 +65,7 @@ struct s_philo
 };
 
 // philo
-void	create_thread(t_data *data, int nb);
-void		*routine(void *arg);
-void		*one_philo(t_data *data);
 void		clear_all(t_data *data);
-
 
 // check 
 int			check_args(int argc, char **argv);
@@ -80,30 +75,35 @@ int			ft_isspace(int c);
 
 // init
 void		init_args(int argc, char **argv, t_data *data);
-void		init_philos(t_data *data, int nb);
 void		init_mutex(t_data *data);
+void		init_philos(t_data *data, int nb);
 
 // simulation
 void		eat(t_philo *philo);
-void		think(t_philo *philo);
-void		sleeping(t_philo *philo);
 void		hold_forks(t_philo *philo);
 void		drop_forks(t_philo *philo);
+void		think(t_philo *philo);
+void		sleeping(t_philo *philo);
 
-// verify
-void	*check_philos(void	*arg);
-int	verify_death(t_data *data);
-int			is_satisfied(t_data *data);
-void		somebody_died(t_data *data, int i);
+// threads
+void		create_thread(t_data *data, int nb);
+void		*routine(void *arg);
+void		*one_philo(t_data *data);
+
+// time
+long int	get_time_ms(void);
+long int	current_time(long int start_time);
+void		time_sleep(long int waiting, long int time);
 
 // utils
 void		print_status(t_philo *philo, int status);
 long int	read_var(long int *var, pthread_mutex_t *mutex);
 void		write_var(long int *var, pthread_mutex_t *mutex, long int status);
 
-// time
-long int	get_time_ms(void);
-long int	current_time(long int start_time);
-void		time_sleep(long int waiting, long int time);
+// verify
+void		*check_philos(void	*arg);
+int			verify_death(t_data *data);
+int			is_satisfied(t_data *data);
+void		somebody_died(t_data *data, int i);
 
 #endif

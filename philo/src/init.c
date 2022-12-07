@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 09:28:08 by jefernan          #+#    #+#             */
-/*   Updated: 2022/12/06 23:24:19 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/12/07 14:26:50 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,10 @@ void	init_philos(t_data *data, int nb)
 		pthread_mutex_init(&philo[i].mutex_ate_meals, NULL);
 		philo[i].philo_id = i + 1;
 		philo[i].right_fork = &data->forks[i];
-		philo[i].left_fork = &data->forks[i + 1];
+		philo[i].left_fork = &data->forks[(i + 1) % nb];
 		philo[i].data = data;
 		philo[i].nb_ate_meals = 0;
 		i++;
 	}
-	philo[i - 1].left_fork = &data->forks[0];
 	data->philo = philo;
 }

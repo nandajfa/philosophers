@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 02:52:50 by jefernan          #+#    #+#             */
-/*   Updated: 2022/12/06 22:20:53 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/12/07 14:25:56 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,17 @@ void	eat(t_philo *philo)
 
 void	hold_forks(t_philo *philo)
 {
-	pthread_mutex_lock(philo->right_fork);
+	if (philo->data->nb_philos % 2 == 0)
+	{
+		pthread_mutex_lock(philo->right_fork);
+		pthread_mutex_lock(philo->left_fork);
+	}
+	else
+	{
+		pthread_mutex_lock(philo->left_fork);
+		pthread_mutex_lock(philo->right_fork);
+	}
 	print_status(philo, FORK);
-	pthread_mutex_lock(philo->left_fork);
 	print_status(philo, FORK);
 }
 
@@ -39,15 +47,15 @@ void	drop_forks(t_philo *philo)
 
 void	think(t_philo *philo)
 {
-//	if (read_var(&philo->data->finish, &philo->data->mutex_finish) == 0)
+	if (read_var(&philo->data->finish, &philo->data->mutex_finish) == 0)
 		print_status(philo, THINK);
 }
 
 void	sleeping(t_philo *philo)
 {
-//	if (read_var(&philo->data->finish, &philo->data->mutex_finish) == 0)
-//	{
+	if (read_var(&philo->data->finish, &philo->data->mutex_finish) == 0)
+	{
 		print_status(philo, SLEEP);
 		time_sleep(philo->data->time_sleep, get_time_ms());
-//	}
+	}
 }

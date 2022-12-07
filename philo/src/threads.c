@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 19:41:41 by jefernan          #+#    #+#             */
-/*   Updated: 2022/12/06 23:29:19 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/12/07 14:27:30 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ void	*routine(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->data->nb_philos == 1)
 		return (one_philo(philo->data));
-	if (philo->philo_id % 2)
-		usleep(40);
+	if (philo->philo_id % 2 == 0)
+		usleep(300);
 	while (philo->nb_ate_meals < philo->data->nb_times_must_eat
-			&& read_var(&philo->data->died, &philo->data->mutex_died) == 0)
+		&& read_var(&philo->data->died, &philo->data->mutex_died) == 0)
 	{
 		eat(philo);
 		if (read_var(&philo->data->finish, &philo->data->mutex_finish) == 1)

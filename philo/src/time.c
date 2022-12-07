@@ -6,7 +6,7 @@
 /*   By: jefernan <jefernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 00:43:36 by jefernan          #+#    #+#             */
-/*   Updated: 2022/12/06 15:44:34 by jefernan         ###   ########.fr       */
+/*   Updated: 2022/12/07 14:33:14 by jefernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ long int	get_time_ms(void)
 	long int		time;
 
 	gettimeofday(&tv, NULL);
-	time = (tv.tv_sec * 1000000 + tv.tv_usec) / 1000;
+	time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	return (time);
 }
 
