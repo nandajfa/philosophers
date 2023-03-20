@@ -1,9 +1,12 @@
 <h1 align="center">
-	42cursus' Philosophers
+	<img alt="badge philo" src="./philosophers_dark.svg" />
  </h1>
+ 
+ <div align="center">
  
   [![NPM](https://img.shields.io/npm/l/react)](https://github.com/nandajfa/philo/blob/main/LICENSE)
  
+  </div>
  
  ### 🗣️ About
 
